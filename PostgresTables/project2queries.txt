@@ -1,0 +1,39 @@
+-- Create DATABASE
+CREATE DATABASE "Infection_Rate"
+    WITH 
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'English_United States.1252'
+    LC_CTYPE = 'English_United States.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+	
+-- Create Two Tables
+CREATE TABLE statepopulation (
+  state varchar PRIMARY KEY,
+  Cases int,
+  Mean float,
+	Population int ,
+	Infection_Rate float
+);
+
+CREATE TABLE MonthlyStateInfect (
+  year int,
+  month varchar,
+  state varchar,
+	Infection_Rate int ,
+	primary key (month,state)
+);
+
+
+SQL Scripts
+
+select s.population,s.cases, s.state, p.infection_rate, p.year, p.month from statepopulation s
+inner join
+monthlystateinfect p on s.state=p.state
+
+
+select s.population,s.cases, s.state, p.infection_rate, p.year, p.month from statepopulation s
+inner join
+monthlystateinfect p on s.state=p.state where s.state = 'Indiana'
+
